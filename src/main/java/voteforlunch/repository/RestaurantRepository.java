@@ -10,13 +10,13 @@ import java.util.Collection;
  * 06.03.2015.
  */
 public interface RestaurantRepository {
-    // null if updated meal do not belong to userId
+    // null if updated Restaurant do not belong to userId
     Restaurant save(Restaurant restaurant, int userId);
 
-    // false if meal do not belong to userId
+    // false if Restaurant do not belong to userId
     boolean delete(int id, int userId);
 
-    // null if meal do not belong to userId
+    // null if Restaurant do not belong to userId
     Restaurant get(int id, int userId);
 
     // ORDERED dateTime
