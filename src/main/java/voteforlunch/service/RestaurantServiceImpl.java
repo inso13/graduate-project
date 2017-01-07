@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import voteforlunch.model.Dish;
 import voteforlunch.model.Restaurant;
 import voteforlunch.repository.RestaurantRepository;
 
@@ -34,8 +35,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 
     @Override
-    public Collection<Restaurant> getAll(int userId) {
-        return repository.getAll(userId);
+    public Collection<Restaurant> getAll() {
+        return repository.getAll();
     }
 
     @Override
@@ -48,5 +49,10 @@ public class RestaurantServiceImpl implements RestaurantService {
     public Restaurant save(Restaurant meal, int userId) {
         Assert.notNull(meal, "Restaurant must not be null");
         return repository.save(meal, userId);
+    }
+
+    @Override
+    public Collection<Dish> getAllDishes(int restId) {
+        return repository.getAllDishes(restId);
     }
 }

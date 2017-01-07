@@ -4,12 +4,14 @@ import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import voteforlunch.model.Dish;
 import voteforlunch.model.Restaurant;
 import voteforlunch.repository.RestaurantRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -49,16 +51,19 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     public Restaurant get(int id, int userId) {
-        List<Restaurant> restaurants = em.createNamedQuery(Restaurant.GET).setParameter("id", id).setParameter("userId", userId).getResultList();
+        List<Restaurant> restaurants = em.createNamedQuery(Restaurant.GET, Restaurant.class).setParameter("id", id).setParameter("userId", userId).getResultList();
         if (restaurants.size() == 0) return null;
         else return DataAccessUtils.singleResult(restaurants);
     }
 
     @Override
-    public List<Restaurant> getAll(int userId) {
+    public List<Restaurant> getAll() {
 
-        return em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).setParameter("userId", userId).getResultList();
+        return em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).getResultList();
     }
 
-
+    @Override
+    public Collection<Dish> getAllDishes(int restId) {
+        return em.createNamedQuery(Dish.ALL_SORTED, Dish.class).getResultList();
+    }
 }

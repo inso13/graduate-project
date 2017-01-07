@@ -1,5 +1,6 @@
 package voteforlunch.service;
 
+import voteforlunch.model.Dish;
 import voteforlunch.model.Restaurant;
 import voteforlunch.util.exception.NotFoundException;
 
@@ -17,7 +18,8 @@ public interface RestaurantService {
 
     void delete(int id, int userId) throws NotFoundException;
 
-    Collection<Restaurant> getAll(int userId);
+    Collection<Restaurant> getAll();
+    Collection<Dish> getAllDishes(int restId);
 
     Restaurant update(Restaurant restaurant, int userId) throws NotFoundException;
 

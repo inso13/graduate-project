@@ -43,7 +43,9 @@ public class JpaUserRepositoryImpl implements UserRepository {
 
     @Override
     public User get(int id) {
-        return em.find(User.class, id);
+        List<User> users = em.createNamedQuery(User.GET, User.class).setParameter("id", id).getResultList();
+        if (users.size() == 0) return null;
+        else return DataAccessUtils.singleResult(users);
     }
 
     @Override

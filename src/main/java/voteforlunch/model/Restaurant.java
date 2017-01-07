@@ -21,7 +21,6 @@ import java.util.Map;
 public class Restaurant extends NamedEntity{
     public static final String DELETE = "Restaurant.delete";
     public static final String ALL_SORTED = "Restaurant.getAllSorted";
-    public static final String BETWEEN = "Restaurant.getBetween";
     public static final String GET = "Restaurant.get";
 
     public Restaurant(Integer id, String name) {

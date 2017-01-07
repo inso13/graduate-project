@@ -1,5 +1,6 @@
 package voteforlunch.repository;
 
+import voteforlunch.model.Dish;
 import voteforlunch.model.Restaurant;
 
 import java.time.LocalDateTime;
@@ -20,7 +21,9 @@ public interface RestaurantRepository {
     Restaurant get(int id, int userId);
 
     // ORDERED dateTime
-    Collection<Restaurant> getAll(int userId);
+    Collection<Restaurant> getAll();
+
+    Collection<Dish> getAllDishes(int restId);
 
 
 }

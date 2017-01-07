@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import voteforlunch.AuthorizedUser;
 
+import voteforlunch.model.Dish;
 import voteforlunch.model.Restaurant;
 import voteforlunch.util.DateTimeUtil;
 import voteforlunch.util.MealsUtil;
@@ -47,8 +48,15 @@ public class RestaurantRestController {
         int userId = AuthorizedUser.id();
         LOG.info("getAll for User {}", userId);
         List<Restaurant> restaurants = new ArrayList<>();
-        restaurants.addAll(service.getAll(userId));
+        restaurants.addAll(service.getAll());
         return restaurants;
+    }
+
+    public List<Dish> getAllDishes(int restId)
+    {
+        List<Dish> dishes = new ArrayList<>();
+        dishes.addAll(service.getAllDishes(restId));
+        return dishes;
     }
 
     public Restaurant create(Restaurant meal) {
