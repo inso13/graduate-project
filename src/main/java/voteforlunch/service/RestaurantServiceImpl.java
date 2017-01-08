@@ -6,6 +6,7 @@ import org.springframework.util.Assert;
 
 import voteforlunch.model.Dish;
 import voteforlunch.model.Restaurant;
+import voteforlunch.model.User;
 import voteforlunch.repository.RestaurantRepository;
 
 import java.time.LocalDateTime;
@@ -30,7 +31,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public void delete(int id, int userId) {
-        checkNotFoundWithId(repository.delete(id, userId), id);
+        checkNotFoundWithId(repository.delete(id), id);
     }
 
 

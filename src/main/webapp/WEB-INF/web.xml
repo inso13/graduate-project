@@ -16,13 +16,22 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>dishServlet</servlet-name>
+        <servlet-class>voteforlunch.web.DishServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dishServlet</servlet-name>
+        <url-pattern>/dishes</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        
         <servlet-name>restaurantServlet</servlet-name>
         <servlet-class>voteforlunch.web.RestaurantServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>restaurantServlet</servlet-name>
-        <url-pattern>/restaurant</url-pattern>
+        <url-pattern>/restaurants</url-pattern>
     </servlet-mapping>
-
 </web-app>

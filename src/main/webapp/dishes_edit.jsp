@@ -12,7 +12,7 @@
     <h2><a href="index.html">Home</a></h2>
     <h2>Dish list</h2>
     <hr>
-    <a href="restaurant?action=create">Add Dish</a>
+    <a href="dishes?action=create">Add Dish</a>
     <hr>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
@@ -29,8 +29,8 @@
             <tr>
                 <td>${dish.description}</td>
                 <td>${dish.price}</td>
-                <td><a href="restaurant?action=update&id=${dish.id}">Update</a></td>
-                <td><a href="restaurant?action=delete&id=${dish.id}">Delete</a></td>
+                <td><a href="dishes?action=update&id=${dish.id}">Update</a></td>
+                <td><a href="dishes?action=delete&id=${dish.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

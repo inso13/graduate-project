@@ -48,14 +48,19 @@ public class UserServlet extends HttpServlet {
         int userId = Integer.valueOf(request.getParameter("userId"));
         AuthorizedUser.setId(userId);
         User currentUser = adminRestController.get(userId);
+        if (currentUser==null) {response.sendRedirect("index.html"); return;}
 
-
-        if (currentUser==null) response.sendRedirect("index.html"); {
+        Set<Role> roleSet = currentUser.getRoles();
 
             request.setAttribute("restaurants", restaurantRestController.getAll());
-            request.getRequestDispatcher("/rest_select.jsp").forward(request, response);}
 
+            if (roleSet.contains(Role.ROLE_ADMIN)) {
 
+            request.getRequestDispatcher("/rest_edit_select.jsp").forward(request, response);
+        } else {
+
+            request.getRequestDispatcher("/rest_select.jsp").forward(request, response);
+        }
     }
 
     @Override

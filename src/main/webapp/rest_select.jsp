@@ -10,7 +10,7 @@
 
 <%--@elvariable id="restaurants" type="voteforlunch.model.Restaurant"--%>
 
-<form method="post" action="restaurant">
+<form method="post" action="dishes">
     <b>Select restaurant:</b>
     <select name="restId">
     <c:forEach items="${restaurants}" var="rest">
@@ -18,5 +18,6 @@
     </c:forEach>
     </select>
     <button type="submit">Select</button>
+</form>
 </body>
 </html>

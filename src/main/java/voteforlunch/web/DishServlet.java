@@ -6,7 +6,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import voteforlunch.AuthorizedUser;
 import voteforlunch.model.Dish;
-import voteforlunch.model.Restaurant;
 import voteforlunch.model.Role;
 import voteforlunch.model.User;
 import voteforlunch.web.Restaurant.RestaurantRestController;
@@ -18,15 +17,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 
-public class RestaurantServlet extends HttpServlet {
-    private static final Logger LOG = LoggerFactory.getLogger(RestaurantServlet.class);
+public class DishServlet extends HttpServlet {
+    private static final Logger LOG = LoggerFactory.getLogger(DishServlet.class);
 
     private ConfigurableApplicationContext springContext;
     private RestaurantRestController restaurantRestController;
@@ -49,45 +46,27 @@ public class RestaurantServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        {
-            String action = request.getParameter("action");
-            if (action == null) {
-                final Restaurant restaurant = new Restaurant(
-                        request.getParameter("name"));
+       /* String action = request.getParameter("action");
+        if (action == null)
+            response.sendRedirect("users");
+         else if (action.equals("restaurant"))*/
+        int restId = Integer.parseInt(request.getParameter("restId"));
+        List<Dish> dishes = restaurantRestController.getAllDishes(restId);
+        User currentUser = adminRestController.get(AuthorizedUser.id());
+        Set<Role> roleSet = currentUser.getRoles();
 
-                if (request.getParameter("id").isEmpty()) {
-                    LOG.info("Create {}", restaurant);
-                    restaurantRestController.create(restaurant);
-                } else {
-                    LOG.info("Update {}", restaurant);
-                   restaurantRestController.update(restaurant, getId(request));
-                }
-                response.sendRedirect("restaurants");
-            }
+        if (roleSet.contains(Role.ROLE_ADMIN)) {
+            request.setAttribute("dishes", dishes);
+            request.getRequestDispatcher("/dishes_edit.jsp").forward(request, response);
+        } else {
+            request.setAttribute("dishes", dishes);
+            request.getRequestDispatcher("/dishes_vote.jsp").forward(request, response);
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null) {
-            LOG.info("getAll");
-            request.setAttribute("restaurants", restaurantRestController.getAll());
-            request.getRequestDispatcher("/rest_edit_select.jsp").forward(request, response);
-
-        } else if ("delete".equals(action)) {
-            int id = getId(request);
-            LOG.info("Delete {}", id);
-            restaurantRestController.delete(id);
-            response.sendRedirect("restaurants");
-
-        } else if ("create".equals(action) || "update".equals(action)) {
-            final Restaurant restaurant = "create".equals(action) ?
-                    new Restaurant("New Restaurant") :
-                    restaurantRestController.get(getId(request));
-            request.setAttribute("restaurant", restaurant);
-            request.getRequestDispatcher("/restaurant_edit_menu.jsp").forward(request, response);
-        }
     }
 
 

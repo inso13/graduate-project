@@ -43,9 +43,9 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     @Transactional
-    public boolean delete(int id, int userId) {
+    public boolean delete(int id) {
 
-        return em.createNamedQuery(Restaurant.DELETE).setParameter("id", id).setParameter("userId", userId).executeUpdate() != 0;
+        return em.createNamedQuery(Restaurant.DELETE).setParameter("id", id).executeUpdate() != 0;
 
     }
 
