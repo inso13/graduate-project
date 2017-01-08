@@ -48,21 +48,19 @@ public class UserServlet extends HttpServlet {
         int userId = Integer.valueOf(request.getParameter("userId"));
         AuthorizedUser.setId(userId);
         User currentUser = adminRestController.get(userId);
-        Set<Role> roleSet = currentUser.getRoles();
 
-        if (roleSet.contains(Role.ROLE_ADMIN)) {
 
-            request.setAttribute("dishes", restaurantRestController.getAllDishes(100002));
+        if (currentUser==null) response.sendRedirect("index.html"); {
+
             request.setAttribute("restaurants", restaurantRestController.getAll());
-            request.getRequestDispatcher("/rest_update.jsp").forward(request, response);}
+            request.getRequestDispatcher("/rest_select.jsp").forward(request, response);}
 
-        else response.sendRedirect("meals");
 
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOG.debug("forward to users");
-       // request.getRequestDispatcher("/rest_update.jsp").forward(request, response);
+       // request.getRequestDispatcher("/rest_select.jsp").forward(request, response);
     }
 }

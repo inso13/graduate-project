@@ -64,6 +64,6 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     public Collection<Dish> getAllDishes(int restId) {
-        return em.createNamedQuery(Dish.ALL_SORTED, Dish.class).getResultList();
+        return em.createNamedQuery(Dish.ALL_SORTED, Dish.class).setParameter("restId", restId).getResultList();
     }
 }

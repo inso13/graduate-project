@@ -9,13 +9,14 @@
 <h2>Restaurant list</h2>
 
 <%--@elvariable id="restaurants" type="voteforlunch.model.Restaurant"--%>
-<c:forEach items="${restaurants}" var="rest">
-    <h3>Name: ${rest.name}; </h3>
-</c:forEach>
-<%--@elvariable id="dishes" type="voteforlunch.model.Dish"--%>
-<c:forEach items="${dishes}" var="dish">
-    <h2>Name: ${dish.description}; ${dish.price};</h2>
-</c:forEach>
 
+<form method="post" action="restaurant">
+    <b>Select restaurant:</b>
+    <select name="restId">
+    <c:forEach items="${restaurants}" var="rest">
+        <option value=${rest.id}>${rest.name}</option>
+    </c:forEach>
+    </select>
+    <button type="submit">Select</button>
 </body>
 </html>
