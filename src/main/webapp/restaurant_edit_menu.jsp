@@ -3,7 +3,7 @@
 
 <html>
 <head>
-    <title>Meal</title>
+    <title>Restaurant</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>

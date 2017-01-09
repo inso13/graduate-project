@@ -17,7 +17,7 @@ INSERT INTO user_roles (role, user_id) VALUES
 INSERT INTO RESTAURANTS (NAME)
     VALUES ('MCdonalds'), ('Burger King');
 
-INSERT INTO DISHES (description, price, REST_ID) VALUES
+INSERT INTO DISHES (description, price, RESTID) VALUES
   ('Биг мак', 130, 100002),
   ('Биг тейсти', 220, 100002),
   ('Картошка', 80, 100002),

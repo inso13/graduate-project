@@ -8,7 +8,7 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id"),
         @NamedQuery(name = Dish.ALL_SORTED, query = "SELECT d FROM Dish d WHERE d.restId=:restId"),
-        @NamedQuery(name = Dish.GET, query = "SELECT r FROM Restaurant r WHERE r.id=:id")
+        @NamedQuery(name = Dish.GET, query = "SELECT d FROM Dish d WHERE d.id=:id")
 })
 @Entity
 @Table(name = "dishes")
@@ -22,10 +22,11 @@ public class Dish extends BaseEntity
     private String description;
     @Column(name = "price")
     private Integer price;
-
-    @Column(name = "rest_id")
+    @Column(name = "restId")
     private Integer restId;
 
+    public Dish(String description, int price) {this.description=description; 
+    this.price=price;}
 
 
     public Dish() {}

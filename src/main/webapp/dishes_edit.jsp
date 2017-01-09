@@ -29,8 +29,8 @@
             <tr>
                 <td>${dish.description}</td>
                 <td>${dish.price}</td>
-                <td><a href="dishes?action=update&id=${dish.id}">Update</a></td>
-                <td><a href="dishes?action=delete&id=${dish.id}">Delete</a></td>
+                <td><a href="dishes?action=update&id=${dish.id}&restId=${dish.restId}">Update</a></td>
+                <td><a href="dishes?action=delete&id=${dish.id}&restId=${dish.restId}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

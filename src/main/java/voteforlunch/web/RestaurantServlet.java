@@ -49,7 +49,7 @@ public class RestaurantServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        {
+
             String action = request.getParameter("action");
             if (action == null) {
                 final Restaurant restaurant = new Restaurant(
@@ -64,7 +64,7 @@ public class RestaurantServlet extends HttpServlet {
                 }
                 response.sendRedirect("restaurants");
             }
-        }
+
     }
 
     @Override
@@ -73,9 +73,17 @@ public class RestaurantServlet extends HttpServlet {
         if (action == null) {
             LOG.info("getAll");
             request.setAttribute("restaurants", restaurantRestController.getAll());
-            request.getRequestDispatcher("/rest_edit_select.jsp").forward(request, response);
+            User currentUser = adminRestController.get(AuthorizedUser.id());
+            Set<Role> roleSet = currentUser.getRoles();
 
-        } else if ("delete".equals(action)) {
+            if (roleSet.contains(Role.ROLE_ADMIN)) {
+                request.getRequestDispatcher("/rest_edit_select.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("/rest_select.jsp").forward(request, response);}
+        }
+
+
+         else if ("delete".equals(action)) {
             int id = getId(request);
             LOG.info("Delete {}", id);
             restaurantRestController.delete(id);
