@@ -51,7 +51,7 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     public Restaurant get(int id, int userId) {
-        List<Restaurant> restaurants = em.createNamedQuery(Restaurant.GET, Restaurant.class).setParameter("id", id).setParameter("userId", userId).getResultList();
+        List<Restaurant> restaurants = em.createNamedQuery(Restaurant.GET, Restaurant.class).setParameter("id", id).getResultList();
         if (restaurants.size() == 0) return null;
         else return DataAccessUtils.singleResult(restaurants);
     }
