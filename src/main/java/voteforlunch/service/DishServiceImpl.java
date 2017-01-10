@@ -10,6 +10,7 @@ import voteforlunch.repository.RestaurantRepository;
 
 import java.util.Collection;
 
+import static voteforlunch.util.ValidationUtil.checkNotFound;
 import static voteforlunch.util.ValidationUtil.checkNotFoundWithId;
 
 /**
@@ -42,7 +43,7 @@ public class DishServiceImpl implements DishService {
     @Override
     public Dish save(Dish dish, int userId) {
         Assert.notNull(dish, "Dish must not be null");
-        return repository.save(dish, userId);
+        return checkNotFound(repository.save(dish, userId), "Dish must not be null, or not enough rights");
     }
 
     @Override

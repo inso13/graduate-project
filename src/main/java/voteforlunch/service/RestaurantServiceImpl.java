@@ -12,6 +12,7 @@ import voteforlunch.repository.RestaurantRepository;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
+import static voteforlunch.util.ValidationUtil.checkNotFound;
 import static voteforlunch.util.ValidationUtil.checkNotFoundWithId;
 
 /**
@@ -49,7 +50,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public Restaurant save(Restaurant restaurant, int userId) {
         Assert.notNull(restaurant, "Restaurant must not be null");
-        return repository.save(restaurant, userId);
+        return checkNotFound(repository.save(restaurant, userId), "Restaurant must not be null, or not enough rights");
     }
 
     @Override

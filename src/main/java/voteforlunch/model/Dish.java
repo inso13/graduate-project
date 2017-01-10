@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @NamedQueries({
         @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id"),
-        @NamedQuery(name = Dish.ALL_SORTED, query = "SELECT d FROM Dish d WHERE d.restId=:restId ORDER BY d.description DESC"),
+        @NamedQuery(name = Dish.ALL_SORTED, query = "SELECT d FROM Dish d WHERE d.restId=:restId ORDER BY d.id"),
         @NamedQuery(name = Dish.GET, query = "SELECT d FROM Dish d WHERE d.id=:id")
 })
 @Entity
@@ -28,14 +28,19 @@ public class Dish extends BaseEntity
     public Dish(String description, int price) {this.description=description; 
     this.price=price;}
 
-
     public Dish() {}
 
     public Dish(String description, int price, int restId) {
         this.description = description;
         this.price = price;
         this.restId=restId;
+    }
 
+    public Dish(int id, String description, int price, int restId) {
+        this.id=id;
+        this.description = description;
+        this.price = price;
+        this.restId=restId;
     }
 
     public void setPrice(Integer price) {
