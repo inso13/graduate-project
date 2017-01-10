@@ -49,22 +49,20 @@ public class RestaurantServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-
             String action = request.getParameter("action");
             if (action == null) {
                 final Restaurant restaurant = new Restaurant(
                         request.getParameter("name"));
 
                 if (request.getParameter("id").isEmpty()) {
-                    LOG.info("Create {}", restaurant);
                     restaurantRestController.create(restaurant);
+                    LOG.info("Create {}", restaurant);
                 } else {
-                    LOG.info("Update {}", restaurant);
                    restaurantRestController.update(restaurant, getId(request));
+                    LOG.info("Update {}", restaurant);
                 }
                 response.sendRedirect("restaurants");
             }
-
     }
 
     @Override
@@ -82,7 +80,6 @@ public class RestaurantServlet extends HttpServlet {
                 request.getRequestDispatcher("/rest_select.jsp").forward(request, response);}
         }
 
-
          else if ("delete".equals(action)) {
             int id = getId(request);
             LOG.info("Delete {}", id);
@@ -95,6 +92,14 @@ public class RestaurantServlet extends HttpServlet {
                     restaurantRestController.get(getId(request));
             request.setAttribute("restaurant", restaurant);
             request.getRequestDispatcher("/restaurant_edit_menu.jsp").forward(request, response);
+        }
+        else if (action.equals("vote"))
+        {
+            Restaurant restaurant = restaurantRestController.get(Integer.parseInt(request.getParameter("restId")));
+            request.setAttribute("restaurant", restaurant);
+            User user = adminRestController.get(AuthorizedUser.id);
+            request.setAttribute("user", user);
+            request.getRequestDispatcher("/vote.jsp").forward(request, response);
         }
     }
 

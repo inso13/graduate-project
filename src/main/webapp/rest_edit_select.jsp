@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>User list</title>
+    <title>Restaurant list</title>
 </head>
 <body>
 <h2><a href="index.html">Home</a></h2>
@@ -11,7 +11,7 @@
 <%--@elvariable id="restaurants" type="voteforlunch.model.Restaurant"--%>
 
 
-<form method="post" action="dishes">
+<form method="post" action="dishes?action=get">
     <b>Select restaurant to watch menu:</b>
     <select name="restId">
         <c:forEach items="${restaurants}" var="rest">
@@ -20,9 +20,6 @@
     </select>
     <button type="submit">Select</button>
 </form>
-<hr>
-<a href="restaurants?action=create">Add Restaurant</a>
-<hr>
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
     <tr>
@@ -38,7 +35,9 @@
             <td><a href="restaurants?action=delete&id=${rest.id}">Delete</a></td>
         </tr>
     </c:forEach>
+    <hr>
+    <a href="restaurants?action=create">Add Restaurant</a>
+    <hr>
 </table>
-
 </body>
 </html>

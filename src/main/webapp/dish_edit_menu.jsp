@@ -12,11 +12,11 @@
     <h2>${param.action == 'create' ? 'Create dish' : 'Edit dish'}</h2>
     <hr>
     <jsp:useBean id="dish" type="voteforlunch.model.Dish" scope="request"/>
-    <form method="post" action="dishes?action=create">
+    <form method="post" action="dishes?action=create&restId=${dish.restId}">
         <input type="hidden" name="id" value="${dish.id}">
         <dl>
-            <dt>Name:</dt>
-            <dd><input type="text" value="${dish.description}" size=40 name="name"></dd>
+            <dt>Description:</dt>
+            <dd><input type="text" value="${dish.description}" size=40 name="description"></dd>
         </dl>
         <dl>
             <dt>Price:</dt>

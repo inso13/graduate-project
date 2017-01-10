@@ -14,7 +14,7 @@ public interface DishRepository {
     Dish save(Dish dish, int userId);
 
     // false if Restaurant do not belong to userId
-    boolean delete(int id);
+    boolean delete(int id, int userId);
 
     // null if Restaurant do not belong to userId
     Dish get(int id, int userId);

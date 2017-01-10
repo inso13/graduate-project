@@ -47,25 +47,11 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int userId = Integer.valueOf(request.getParameter("userId"));
         AuthorizedUser.setId(userId);
-        User currentUser = adminRestController.get(userId);
-        if (currentUser==null) {response.sendRedirect("index.html"); return;}
-
-        Set<Role> roleSet = currentUser.getRoles();
-
-            request.setAttribute("restaurants", restaurantRestController.getAll());
-
-            if (roleSet.contains(Role.ROLE_ADMIN)) {
-
-            request.getRequestDispatcher("/rest_edit_select.jsp").forward(request, response);
-        } else {
-
-            request.getRequestDispatcher("/rest_select.jsp").forward(request, response);
-        }
+        response.sendRedirect("restaurants");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LOG.debug("forward to users");
-       // request.getRequestDispatcher("/rest_select.jsp").forward(request, response);
+
     }
 }

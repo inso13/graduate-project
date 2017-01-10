@@ -11,9 +11,6 @@
 <section>
     <h2><a href="index.html">Home</a></h2>
     <h2>Dish list</h2>
-    <hr>
-    <a href="dishes?action=create">Add Dish</a>
-    <hr>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
@@ -31,8 +28,15 @@
                 <td>${dish.price}</td>
                 <td><a href="dishes?action=update&id=${dish.id}&restId=${dish.restId}">Update</a></td>
                 <td><a href="dishes?action=delete&id=${dish.id}&restId=${dish.restId}">Delete</a></td>
+                <c:set var="restId" value="${dish.restId}"/>
             </tr>
         </c:forEach>
+        <hr>
+        <a href="dishes?action=create&restId=${restId}">Add Dish</a>
+        <hr>
+        <hr>
+        <a href="restaurants?action=vote&restId=${restId}">Vote for this restaurant</a>
+        <hr>
     </table>
 </section>
 </body>

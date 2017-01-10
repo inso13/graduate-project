@@ -49,25 +49,12 @@ public class DishServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
        String action = request.getParameter("action");
-        if (action == null)
-        {int restId = Integer.parseInt(request.getParameter("restId"));
-        List<Dish> dishes = dishRestController.getAllDishes(restId);
-        User currentUser = adminRestController.get(AuthorizedUser.id());
-        Set<Role> roleSet = currentUser.getRoles();
-            request.setAttribute("dishes", dishes);
-            request.setAttribute("restId", restId);
-        if (roleSet.contains(Role.ROLE_ADMIN)) {
-            request.getRequestDispatcher("/dishes_edit.jsp").forward(request, response);
-        } else {
-            request.getRequestDispatcher("/dishes_vote.jsp").forward(request, response);}
-        }
-        else if (action.equals("create"))
+        if (action.equals("create"))
         {
-            String name = request.getParameter("name");
             String price = request.getParameter("price");
             String restId = request.getParameter("restId");
             final Dish dish = new Dish(
-                    request.getParameter(name),
+                    request.getParameter("description"),
                     Integer.parseInt(price), Integer.parseInt(restId));
 
             if (request.getParameter("id").isEmpty()) {
@@ -77,34 +64,42 @@ public class DishServlet extends HttpServlet {
                 LOG.info("Update {}", dish);
                 dishRestController.update(dish, getId(request));
             }
-            response.sendRedirect("dishes");
+            response.sendRedirect("dishes?action=get&restId="+restId);
+        }
+        if (action.equals("get"))
+        {
+            int restId = Integer.parseInt(request.getParameter("restId"));
+            response.sendRedirect("dishes?action=get&restId="+restId);
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null) {
+        if (action.equals("get")) {
             LOG.info("getAll");
             int restId = Integer.parseInt(request.getParameter("restId"));
             request.setAttribute("dishes", dishRestController.
                     getAllDishes(restId));
+            request.setAttribute("restId", restId);
             User currentUser = adminRestController.get(AuthorizedUser.id());
             Set<Role> roleSet = currentUser.getRoles();
 
             if (roleSet.contains(Role.ROLE_ADMIN)) {
-                request.getRequestDispatcher("/dishes_edit.jsp").forward(request, response);
+                request.getRequestDispatcher("/dishes_edit_vote.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("/dishes_vote.jsp").forward(request, response);}
         } else if ("delete".equals(action)) {
             int id = getId(request);
+            int restId = Integer.parseInt(request.getParameter("restId"));
             LOG.info("Delete {}", id);
             dishRestController.delete(id);
-           response.sendRedirect("dishes");
+           response.sendRedirect("dishes?action=get&restId="+restId);
 
         } else if ("create".equals(action) || "update".equals(action)) {
+            int restId = Integer.parseInt(request.getParameter("restId"));
             final Dish dish = "create".equals(action) ?
-                    new Dish("New Dish", 100) :
+                    new Dish("New Dish", 100, restId) :
                    dishRestController.get(getId(request));
             request.setAttribute("dish", dish);
             request.getRequestDispatcher("/dish_edit_menu.jsp").forward(request, response);

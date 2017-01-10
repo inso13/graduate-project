@@ -15,7 +15,7 @@ public interface RestaurantRepository {
     Restaurant save(Restaurant restaurant, int userId);
 
     // false if Restaurant do not belong to userId
-    boolean delete(int id);
+    boolean delete(int id, int userId);
 
     // null if Restaurant do not belong to userId
     Restaurant get(int id, int userId);

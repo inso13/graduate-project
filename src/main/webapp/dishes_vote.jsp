@@ -11,9 +11,6 @@
 <section>
     <h2><a href="index.html">Home</a></h2>
     <h2>Dish list</h2>
-    <hr>
-    <a href="restaurant?action=vote">Vote for this restaurant</a>
-    <hr>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
@@ -27,8 +24,12 @@
             <tr>
                 <td>${dish.description}</td>
                 <td>${dish.price}</td>
+                <c:set var="restId" value="${dish.restId}"/>
             </tr>
         </c:forEach>
+        <hr>
+        <a href="restaurants?action=vote&restId=${restId}">Vote for this restaurant</a>
+        <hr>
     </table>
 </section>
 </body>

@@ -29,7 +29,7 @@ public class DishServiceImpl implements DishService {
 
     @Override
     public void delete(int id, int userId) {
-        checkNotFoundWithId(repository.delete(id), id);
+        checkNotFoundWithId(repository.delete(id, userId), id);
     }
 
 

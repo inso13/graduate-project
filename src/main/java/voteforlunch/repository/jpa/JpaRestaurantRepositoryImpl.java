@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import voteforlunch.model.Dish;
 import voteforlunch.model.Restaurant;
+import voteforlunch.model.Role;
+import voteforlunch.model.User;
 import voteforlunch.repository.RestaurantRepository;
 
 import javax.persistence.EntityManager;
@@ -13,6 +15,7 @@ import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * User: gkisline
@@ -30,7 +33,7 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
     @Transactional
     public Restaurant save(Restaurant restaurant, int userId) {
 
-
+        if (!checkForAdmin(userId)) return null;
         if (restaurant.isNew()) {
             em.persist(restaurant);
 
@@ -43,10 +46,8 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     @Transactional
-    public boolean delete(int id) {
-
-        return em.createNamedQuery(Restaurant.DELETE).setParameter("id", id).executeUpdate() != 0;
-
+    public boolean delete(int id, int userId) {
+        return checkForAdmin(userId) && em.createNamedQuery(Restaurant.DELETE).setParameter("id", id).executeUpdate() != 0;
     }
 
     @Override
@@ -66,4 +67,12 @@ public class JpaRestaurantRepositoryImpl implements RestaurantRepository {
     public Collection<Dish> getAllDishes(int restId) {
         return em.createNamedQuery(Dish.ALL_SORTED, Dish.class).setParameter("restId", restId).getResultList();
     }
+
+   private boolean checkForAdmin(int userId)
+    {
+        User user = em.createNamedQuery(User.GET, User.class).setParameter("id", userId).getSingleResult();
+        Set<Role> roleSet = user.getRoles();
+        return roleSet.contains(Role.ROLE_ADMIN);
+    }
+
 }

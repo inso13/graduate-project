@@ -31,7 +31,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public void delete(int id, int userId) {
-        checkNotFoundWithId(repository.delete(id), id);
+        checkNotFoundWithId(repository.delete(id, userId), id);
     }
 
 
@@ -47,9 +47,9 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public Restaurant save(Restaurant meal, int userId) {
-        Assert.notNull(meal, "Restaurant must not be null");
-        return repository.save(meal, userId);
+    public Restaurant save(Restaurant restaurant, int userId) {
+        Assert.notNull(restaurant, "Restaurant must not be null");
+        return repository.save(restaurant, userId);
     }
 
     @Override
