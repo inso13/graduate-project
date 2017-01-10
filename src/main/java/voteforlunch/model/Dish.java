@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @NamedQueries({
         @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id"),
-        @NamedQuery(name = Dish.ALL_SORTED, query = "SELECT d FROM Dish d WHERE d.restId=:restId"),
+        @NamedQuery(name = Dish.ALL_SORTED, query = "SELECT d FROM Dish d WHERE d.restId=:restId ORDER BY d.description DESC"),
         @NamedQuery(name = Dish.GET, query = "SELECT d FROM Dish d WHERE d.id=:id")
 })
 @Entity
