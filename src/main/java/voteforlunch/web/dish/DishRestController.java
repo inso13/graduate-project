@@ -46,18 +46,18 @@ public class DishRestController {
         return dishes;
     }
 
-    public Dish create(Dish dish) {
+    public Dish create(Dish dish, int restId) {
         checkNew(dish);
         int userId = AuthorizedUser.id();
         LOG.info("create {} for User {}", dish, userId);
-        return service.save(dish, userId);
+        return service.save(dish, userId, restId);
     }
 
-    public void update(Dish dish, int id) {
+    public void update(Dish dish, int id,  int restId) {
         checkIdConsistent(dish, id);
         int userId = AuthorizedUser.id();
         LOG.info("update {} for User {}", dish, userId);
-        service.update(dish, userId);
+        service.update(dish, userId, restId);
     }
 
 }

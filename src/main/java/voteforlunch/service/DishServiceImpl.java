@@ -35,15 +35,15 @@ public class DishServiceImpl implements DishService {
 
 
     @Override
-    public Dish update(Dish dish, int userId) {
+    public Dish update(Dish dish, int userId,  int restId) {
         Assert.notNull(dish, "Dish must not be null");
-        return checkNotFoundWithId(repository.save(dish, userId), dish.getId());
+        return checkNotFoundWithId(repository.save(dish, userId, restId), dish.getId());
     }
 
     @Override
-    public Dish save(Dish dish, int userId) {
+    public Dish save(Dish dish, int userId,  int restId) {
         Assert.notNull(dish, "Dish must not be null");
-        return checkNotFound(repository.save(dish, userId), "Dish must not be null, or not enough rights");
+        return checkNotFound(repository.save(dish, userId, restId), "Dish must not be null, or not enough rights");
     }
 
     @Override

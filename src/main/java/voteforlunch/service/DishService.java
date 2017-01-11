@@ -17,7 +17,7 @@ public interface DishService {
 
     Collection<Dish> getAllDishes(int restId);
 
-    Dish update(Dish dish, int userId) throws NotFoundException;
+    Dish update(Dish dish, int userId,  int restId) throws NotFoundException;
 
-    Dish save(Dish dish, int userId);
+    Dish save(Dish dish, int userId,  int restId);
 }

@@ -11,7 +11,7 @@ import java.util.Collection;
  */
 public interface DishRepository {
     // null if updated Restaurant do not belong to userId
-    Dish save(Dish dish, int userId);
+    Dish save(Dish dish, int userId,  int restId);
 
     // false if Restaurant do not belong to userId
     boolean delete(int id, int userId);

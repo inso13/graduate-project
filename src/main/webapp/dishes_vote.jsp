@@ -1,3 +1,4 @@
+<%--@elvariable id="restId" type="java.lang.Integer"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -24,7 +25,6 @@
             <tr>
                 <td>${dish.description}</td>
                 <td>${dish.price}</td>
-                <c:set var="restId" value="${dish.restId}"/>
             </tr>
         </c:forEach>
         <hr>

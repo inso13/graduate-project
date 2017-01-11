@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @NamedQueries({
         @NamedQuery(name = Dish.DELETE, query = "DELETE FROM Dish d WHERE d.id=:id"),
-        @NamedQuery(name = Dish.ALL_SORTED, query = "SELECT d FROM Dish d WHERE d.restId=:restId ORDER BY d.id"),
+        @NamedQuery(name = Dish.ALL_SORTED, query = "SELECT d FROM Dish d WHERE d.restaurant.id=:restId ORDER BY d.id"),
         @NamedQuery(name = Dish.GET, query = "SELECT d FROM Dish d WHERE d.id=:id")
 })
 @Entity
@@ -22,37 +22,24 @@ public class Dish extends BaseEntity
     private String description;
     @Column(name = "price")
     private Integer price;
-    @Column(name = "restId")
-    private Integer restId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restId")
+    private Restaurant restaurant;
 
     public Dish(String description, int price) {this.description=description; 
     this.price=price;}
 
     public Dish() {}
 
-    public Dish(String description, int price, int restId) {
-        this.description = description;
-        this.price = price;
-        this.restId=restId;
-    }
-
-    public Dish(int id, String description, int price, int restId) {
+    public Dish(int id, String description, int price) {
         this.id=id;
         this.description = description;
         this.price = price;
-        this.restId=restId;
     }
 
     public void setPrice(Integer price) {
         this.price = price;
-    }
-
-    public Integer getRestId() {
-        return restId;
-    }
-
-    public void setRestId(Integer restId) {
-        this.restId = restId;
     }
 
     public String getDescription() {
@@ -67,4 +54,11 @@ public class Dish extends BaseEntity
         return price;
     }
 
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 }

@@ -21,14 +21,14 @@
         </tr>
         </thead>
         <%--@elvariable id="dishes" type="voteforlunch.model.dish"--%>
-        <c:forEach items="${dishes}" var="dish">
+        <c:forEach items="${dishes}" var="dish"><%--@elvariable id="restId" type="java.lang.Integer"--%>
             <jsp:useBean id="dish" scope="page" type="voteforlunch.model.Dish"/>
             <tr>
                 <td>${dish.description}</td>
                 <td>${dish.price}</td>
-                <td><a href="dishes?action=update&id=${dish.id}&restId=${dish.restId}">Update</a></td>
-                <td><a href="dishes?action=delete&id=${dish.id}&restId=${dish.restId}">Delete</a></td>
-                <c:set var="restId" value="${dish.restId}"/>
+                <td><a href="dishes?action=update&id=${dish.id}&restId=${restId}">Update</a></td>
+                <td><a href="dishes?action=delete&id=${dish.id}&restId=${restId}">Delete</a></td>
+                <c:set var="restId" value="${restId}"/>
             </tr>
         </c:forEach>
         <hr>

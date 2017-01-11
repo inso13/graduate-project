@@ -30,7 +30,10 @@ public class JpaDishRepositoryImpl implements DishRepository {
 
     @Override
     @Transactional
-    public Dish save(Dish dish, int userId) {
+    public Dish save(Dish dish, int userId, int restId) {
+
+        Restaurant ref = em.getReference(Restaurant.class, restId);
+        dish.setRestaurant(ref);
 
         if (!checkForAdmin(userId)) return null;
         if (dish.isNew()) {

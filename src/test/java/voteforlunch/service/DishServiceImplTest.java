@@ -53,14 +53,14 @@ public class DishServiceImplTest {
     @Test
     public void update() throws Exception {
         Dish updated = getUpdated();
-        service.update(updated, ADMIN_ID);
+        service.update(updated, ADMIN_ID, 100002);
         DishTestData.MATCHER.assertEquals(updated, service.get(100004, ADMIN_ID));
     }
 
     @Test
     public void save() throws Exception {
         Dish created = getCreated();
-        service.save(created, ADMIN_ID);
+        service.save(created, ADMIN_ID, 100002);
         DishTestData.MATCHER.assertCollectionEquals(
                 Arrays.asList(DISH1, DISH2,DISH3,DISH4, created),
                 service.getAllDishes(100002)
@@ -81,7 +81,7 @@ public class DishServiceImplTest {
     @Test
     public void testUpdateNotFound() throws Exception {
         thrown.expect(NotFoundException.class);
-        service.update(DISH3, USER_ID);
+        service.update(DISH3, USER_ID, 100002);
     }
 
     @Test
@@ -94,6 +94,6 @@ public class DishServiceImplTest {
     public void saveByWrongUser() throws Exception {
         thrown.expect(NotFoundException.class);
         Dish created = getCreated();
-        service.save(created, USER_ID);
+        service.save(created, USER_ID, 100003);
     }
 }

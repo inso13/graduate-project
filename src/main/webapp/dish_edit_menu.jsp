@@ -1,3 +1,4 @@
+<jsp:useBean id="restId" scope="request" type="java.lang.Integer"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -12,7 +13,7 @@
     <h2>${param.action == 'create' ? 'Create dish' : 'Edit dish'}</h2>
     <hr>
     <jsp:useBean id="dish" type="voteforlunch.model.Dish" scope="request"/>
-    <form method="post" action="dishes?action=create&restId=${dish.restId}">
+    <form method="post" action="dishes?action=create&restId=${restId}">
         <input type="hidden" name="id" value="${dish.id}">
         <dl>
             <dt>Description:</dt>
@@ -22,7 +23,7 @@
             <dt>Price:</dt>
             <dd><input type="text" value="${dish.price}" size=40 name="price"></dd>
         </dl>
-        <input type="hidden" name="restId" value="${dish.restId}">
+        <input type="hidden" name="restId" value="${restId}">
         <button type="submit">Save</button>
         <button onclick="window.history.back()">Cancel</button>
     </form>

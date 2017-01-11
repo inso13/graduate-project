@@ -55,14 +55,14 @@ public class DishServlet extends HttpServlet {
             String restId = request.getParameter("restId");
             final Dish dish = new Dish(
                     request.getParameter("description"),
-                    Integer.parseInt(price), Integer.parseInt(restId));
+                    Integer.parseInt(price));
 
             if (request.getParameter("id").isEmpty()) {
                 LOG.info("Create {}", dish);
-                dishRestController.create(dish);
+                dishRestController.create(dish, Integer.parseInt(restId));
             } else {
                 LOG.info("Update {}", dish);
-                dishRestController.update(dish, getId(request));
+                dishRestController.update(dish, getId(request), Integer.parseInt(restId));
             }
             response.sendRedirect("dishes?action=get&restId="+restId);
         }
@@ -99,9 +99,10 @@ public class DishServlet extends HttpServlet {
         } else if ("create".equals(action) || "update".equals(action)) {
             int restId = Integer.parseInt(request.getParameter("restId"));
             final Dish dish = "create".equals(action) ?
-                    new Dish("New Dish", 100, restId) :
+                    new Dish("New Dish", 100) :
                    dishRestController.get(getId(request));
             request.setAttribute("dish", dish);
+            request.setAttribute("restId", restId);
             request.getRequestDispatcher("/dish_edit_menu.jsp").forward(request, response);
         }
     }
