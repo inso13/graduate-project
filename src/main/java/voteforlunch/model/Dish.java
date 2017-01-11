@@ -24,7 +24,7 @@ public class Dish extends BaseEntity
     private Integer price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restId")
+    @JoinColumn(name = "restId", referencedColumnName = "id")
     private Restaurant restaurant;
 
     public Dish(String description, int price) {this.description=description; 
