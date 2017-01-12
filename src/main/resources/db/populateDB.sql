@@ -26,3 +26,7 @@ INSERT INTO DISHES (description, price, RESTID) VALUES
   ('Воппер', 140, 100003),
   ('Пепси кола', 80, 100003),
   ('Пирожок', 70, 100003);
+
+INSERT INTO VOTES (DATETIME, RESTID, USER_ID) VALUES
+  ('2017-01-12', 100002, 100000),
+  ('2017-01-12', 100003, 100001);

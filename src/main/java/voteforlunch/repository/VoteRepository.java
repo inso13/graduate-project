@@ -14,12 +14,12 @@ public interface VoteRepository {
     Vote save(Vote vote, int userId, int restId);
 
     // false if Restaurant do not belong to userId
-    Vote delete(int id, int userId);
+    boolean delete(int userId);
 
     // null if Restaurant do not belong to userId
-    Vote get(int id, int userId);
+    Vote get(int userId);
 
-    Collection<Dish> getAllDishes(int restId);
+    Collection<Vote> getAllVotes(int restId);
 
 
 }
