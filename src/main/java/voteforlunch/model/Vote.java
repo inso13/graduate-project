@@ -67,6 +67,28 @@ public class Vote extends BaseEntity {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Vote vote = (Vote) o;
+
+        if (dateTime != null ? !dateTime.equals(vote.dateTime) : vote.dateTime != null) return false;
+        if (restaurant != null ? !restaurant.equals(vote.restaurant) : vote.restaurant != null) return false;
+        return user != null ? user.equals(vote.user) : vote.user == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (dateTime != null ? dateTime.hashCode() : 0);
+        result = 31 * result + (restaurant != null ? restaurant.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "Vote{" +
                 "dateTime=" + dateTime +

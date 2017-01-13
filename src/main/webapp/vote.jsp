@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>Meal</title>
+    <title>Vote</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
 <form method="post" action="votes?action=confirm">
     <input type="hidden" name="restId" value="${restaurant.id}">
     <input type="hidden" name="userId" value="${user.id}">
-    <button type="submit">Save</button>
+    <button type="submit">Confirm</button>
     <button onclick="window.history.back()">Cancel</button>
 </form>
 </body>
