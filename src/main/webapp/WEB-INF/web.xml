@@ -25,7 +25,6 @@
         <url-pattern>/dishes</url-pattern>
     </servlet-mapping>
     <servlet>
-        
         <servlet-name>restaurantServlet</servlet-name>
         <servlet-class>voteforlunch.web.RestaurantServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
@@ -34,4 +33,14 @@
         <servlet-name>restaurantServlet</servlet-name>
         <url-pattern>/restaurants</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>voteServlet</servlet-name>
+        <servlet-class>voteforlunch.web.VoteServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>voteServlet</servlet-name>
+        <url-pattern>/votes</url-pattern>
+    </servlet-mapping>
+
 </web-app>

@@ -12,6 +12,7 @@ import voteforlunch.model.User;
 import voteforlunch.web.Restaurant.RestaurantRestController;
 import voteforlunch.web.dish.DishRestController;
 import voteforlunch.web.user.AdminRestController;
+import voteforlunch.web.vote.VoteRestController;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -30,6 +31,7 @@ public class DishServlet extends HttpServlet {
     private ConfigurableApplicationContext springContext;
     private DishRestController dishRestController;
     private AdminRestController adminRestController;
+    private VoteRestController voteRestController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -37,6 +39,7 @@ public class DishServlet extends HttpServlet {
         springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
        dishRestController = springContext.getBean(DishRestController.class);
         adminRestController = springContext.getBean(AdminRestController.class);
+        voteRestController = springContext.getBean(VoteRestController.class);
     }
 
     @Override
@@ -82,6 +85,7 @@ public class DishServlet extends HttpServlet {
             request.setAttribute("dishes", dishRestController.
                     getAllDishes(restId));
             request.setAttribute("restId", restId);
+            request.setAttribute("votes", voteRestController.getAllVotes(restId).size());
             User currentUser = adminRestController.get(AuthorizedUser.id());
             Set<Role> roleSet = currentUser.getRoles();
 

@@ -25,7 +25,7 @@ public class VoteServiceImpl implements VoteService {
 
     @Override
     public Vote get(int id, int userId) throws NotFoundException {
-        return checkNotFound(repository.get(userId), "");
+        return repository.get(userId);
     }
 
     @Override

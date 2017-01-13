@@ -1,3 +1,4 @@
+<%--@elvariable id="votes" type="java.Integer"--%>
 <%--@elvariable id="restId" type="java.lang.Integer"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -29,6 +30,7 @@
         </c:forEach>
         <hr>
         <a href="restaurants?action=vote&restId=${restId}">Vote for this restaurant</a>
+        <h2>Today votes: ${votes}</h2>
         <hr>
     </table>
 </section>

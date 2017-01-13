@@ -15,7 +15,12 @@
     <h2>Vote menu</h2>
     <h3>You are going to vote for: ${restaurant.name}</h3>
     <h3>You are logged as: ${user.name}</h3>
-    <h3>Sorry, vote API not ready yet :(</h3>
 </section>
+<form method="post" action="votes?action=confirm">
+    <input type="hidden" name="restId" value="${restaurant.id}">
+    <input type="hidden" name="userId" value="${user.id}">
+    <button type="submit">Save</button>
+    <button onclick="window.history.back()">Cancel</button>
+</form>
 </body>
 </html>

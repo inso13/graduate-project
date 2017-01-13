@@ -1,3 +1,4 @@
+<%--@elvariable id="votes" type="java.lang.Integer"--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -7,6 +8,7 @@
     <title>Meal list</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 <section>
     <h2><a href="index.html">Home</a></h2>
@@ -36,6 +38,7 @@
         <hr>
         <hr>
         <a href="restaurants?action=vote&restId=${restId}">Vote for this restaurant</a>
+        <h2>Today votes: ${votes}</h2>
         <hr>
     </table>
 </section>

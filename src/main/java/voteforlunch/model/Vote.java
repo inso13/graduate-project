@@ -23,11 +23,11 @@ public class Vote extends BaseEntity {
     @Column(name="datetime")
     private LocalDate dateTime;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "restId", referencedColumnName = "id")
     private Restaurant restaurant;
 
-    @OneToOne(fetch=FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
 

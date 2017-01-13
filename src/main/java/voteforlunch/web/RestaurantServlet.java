@@ -5,12 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import voteforlunch.AuthorizedUser;
-import voteforlunch.model.Dish;
-import voteforlunch.model.Restaurant;
-import voteforlunch.model.Role;
-import voteforlunch.model.User;
+import voteforlunch.model.*;
 import voteforlunch.web.Restaurant.RestaurantRestController;
 import voteforlunch.web.user.AdminRestController;
+import voteforlunch.web.vote.VoteRestController;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -32,12 +30,14 @@ public class RestaurantServlet extends HttpServlet {
     private RestaurantRestController restaurantRestController;
     private AdminRestController adminRestController;
 
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
         restaurantRestController = springContext.getBean(RestaurantRestController.class);
         adminRestController = springContext.getBean(AdminRestController.class);
+
     }
 
     @Override
