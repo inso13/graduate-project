@@ -26,10 +26,12 @@ public class SpringMain {
             VoteRestController voteRestController = appCtx.getBean(VoteRestController.class);
             AdminRestController adminRestController = appCtx.getBean(AdminRestController.class);
             RestaurantRestController restaurantRestController = appCtx.getBean(RestaurantRestController.class);
-
+            AuthorizedUser.setId(100001);
+           voteRestController.create(new Vote(LocalDate.now()), 100003);
            System.out.println(voteRestController.get(100012));
-            System.out.println(voteRestController.getAllDishes(100002));
-            voteRestController.delete(100013);
+            System.out.println(voteRestController.getAllVotes(100003));
+            voteRestController.delete(100012);
+            System.out.println(voteRestController.getAllVotes(100003));
             System.out.println();
 
         }

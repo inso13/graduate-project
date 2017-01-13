@@ -31,7 +31,7 @@ public class JpaVoteRepositoryImpl implements VoteRepository {
 
         Restaurant restRef = em.getReference(Restaurant.class, restId);
         vote.setRestaurant(restRef);
-        User userRef = em.getReference(User.class, restId);
+        User userRef = em.getReference(User.class, userId);
         vote.setUser(userRef);
         if (vote.isNew() && (get(userId)==null)) {
             em.persist(vote);
@@ -44,6 +44,7 @@ public class JpaVoteRepositoryImpl implements VoteRepository {
     }
 
     @Override
+    @Transactional
     public boolean delete(int userId) {
         return checkForAdmin(userId) && em.createNamedQuery(Vote.DELETE).setParameter("userId", userId).executeUpdate() != 0;
     }

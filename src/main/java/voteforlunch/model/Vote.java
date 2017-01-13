@@ -23,11 +23,11 @@ public class Vote extends BaseEntity {
     @Column(name="datetime")
     private LocalDate dateTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restId", referencedColumnName = "id")
     private Restaurant restaurant;
 
-    @OneToOne(fetch=FetchType.LAZY)
+    @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
 
@@ -64,5 +64,14 @@ public class Vote extends BaseEntity {
         this.restaurant = restaurant;
         this.user = user;
 
+    }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "dateTime=" + dateTime +
+                ", restaurant=" + restaurant +
+                ", user=" + user +
+                '}';
     }
 }

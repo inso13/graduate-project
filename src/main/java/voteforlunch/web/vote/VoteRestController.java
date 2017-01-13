@@ -39,7 +39,7 @@ public class VoteRestController {
         service.delete(id, userId);
     }
 
-    public List<Vote> getAllDishes(int restId)
+    public List<Vote> getAllVotes(int restId)
     {
         List<Vote> votes = new ArrayList<>();
         votes.addAll(service.getAllVotes(restId));
