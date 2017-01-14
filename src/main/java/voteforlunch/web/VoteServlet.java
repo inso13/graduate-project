@@ -52,18 +52,16 @@ public class VoteServlet extends HttpServlet {
             String userId = request.getParameter("userId");
             final Vote vote = new Vote(LocalDate.now());
             request.setAttribute("restId", Integer.parseInt(restId));
-            if (voteRestController.get(Integer.parseInt(userId))==null) {
+            if (voteRestController.get()==null) {
                 LOG.info("Create {}", vote);
                 if (voteRestController.create(vote, Integer.parseInt(restId))!=null)
                     request.getRequestDispatcher("vote_success.jsp").forward(request, response);
                 else request.getRequestDispatcher("vote_fail.jsp").forward(request, response);
             } else {
                 LOG.info("Update {}", vote);
-                Vote before = voteRestController.get(Integer.parseInt(userId));
-                voteRestController.update(vote, voteRestController.get(Integer.parseInt(userId)).getId(), Integer.parseInt(request.getParameter("restId")));
-                Vote after = voteRestController.get(Integer.parseInt(userId));
-                if ((after.getRestaurant().getId().equals(before.getRestaurant().getId())) &&
-                        after.getDateTime().equals(before.getDateTime())) request.getRequestDispatcher("vote_success.jsp").forward(request, response);
+
+                if ((voteRestController.update(vote, voteRestController.get().getId(), Integer.parseInt(request.getParameter("restId"))))!=null)
+                    request.getRequestDispatcher("vote_success.jsp").forward(request, response);
                 else request.getRequestDispatcher("vote_fail.jsp").forward(request, response);
             }
 

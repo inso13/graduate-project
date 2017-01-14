@@ -66,6 +66,18 @@ public class Vote extends BaseEntity {
 
     }
 
+    public Vote(Integer id, LocalDate dateTime) {
+        super(id);
+        this.dateTime = dateTime;
+    }
+
+    public Vote(Integer id, LocalDate dateTime, Restaurant restaurant, User user) {
+        super(id);
+        this.dateTime = dateTime;
+        this.restaurant = restaurant;
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

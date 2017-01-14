@@ -6,7 +6,7 @@
 <%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>
 <html>
 <head>
-    <title>Meal list</title>
+    <title>Restaurant menu</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -33,6 +33,8 @@
         <h2>Today votes: ${votes}</h2>
         <hr>
     </table>
+    <h2> </h2>
+    <a href="restaurants">Go back to restaurant select menu</a>
 </section>
 </body>
 </html>

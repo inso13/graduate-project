@@ -27,10 +27,10 @@ public class VoteRestController {
     @Autowired
     private VoteService service;
 
-    public Vote get(int id) {
+    public Vote get() {
         int userId = AuthorizedUser.id();
-        LOG.info("get Vote {} for User {}", id, userId);
-        return service.get(id, userId);
+        LOG.info("get Vote {} for User {}", userId);
+        return service.get(userId);
     }
 
     public void delete(int id) {
@@ -53,11 +53,11 @@ public class VoteRestController {
         return service.save(vote, userId, restId);
     }
 
-    public void update(Vote vote, int id, int restId) {
+    public Vote update(Vote vote, int id, int restId) {
         checkIdConsistent(vote, id);
         int userId = AuthorizedUser.id();
         LOG.info("update Vote {} for User {}", vote, userId);
-        service.update(vote, userId, restId);
+        return service.update(vote, userId, restId);
     }
 
 }

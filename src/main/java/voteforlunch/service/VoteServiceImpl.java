@@ -3,11 +3,11 @@ package voteforlunch.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import voteforlunch.model.Dish;
 import voteforlunch.model.Vote;
 import voteforlunch.repository.VoteRepository;
 import voteforlunch.util.exception.NotFoundException;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collection;
 
@@ -24,8 +24,8 @@ public class VoteServiceImpl implements VoteService {
     private VoteRepository repository;
 
     @Override
-    public Vote get(int id, int userId) throws NotFoundException {
-        return repository.get(userId);
+    public Vote get(int userId) throws NotFoundException {
+       return repository.get(userId);
     }
 
     @Override
@@ -42,8 +42,11 @@ public class VoteServiceImpl implements VoteService {
     public Vote update(Vote vote, int userId, int restId) throws NotFoundException {
         Assert.notNull(vote, "Vote must not be null");
         LocalTime time = LocalTime.now();
-        if (time.isAfter(LocalTime.of(11, 0))) return null;
-        return checkNotFoundWithId(repository.save(vote, userId, restId), vote.getId());
+        LocalDate voteDate = repository.get(userId).getDateTime();
+
+        if (!voteDate.equals(LocalDate.now())) return checkNotFoundWithId(repository.save(vote, userId, restId), vote.getId());
+        if (time.isBefore(LocalTime.of(11, 0))) {return checkNotFoundWithId(repository.save(vote, userId, restId), vote.getId());}
+        return null;
     }
 
     @Override
