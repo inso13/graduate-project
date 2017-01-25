@@ -4,14 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>
 <html>
-<head>
-    <title>Restaurant menu</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
+<jsp:include page="fragments/headTag.jsp"/>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
+<link rel="stylesheet" href="resources/css/style.css">
 <section>
-    <h2><a href="index.jsp">Home</a></h2>
     <h2>Dish list</h2>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
@@ -28,21 +25,22 @@
             <tr>
                 <td>${dish.description}</td>
                 <td>${dish.price}</td>
-                <td><a href="dishes?action=update&id=${dish.id}&restId=${restId}">Update</a></td>
-                <td><a href="dishes?action=delete&id=${dish.id}&restId=${restId}">Delete</a></td>
+                <td><a href="dishes/update?id=${dish.id}&restId=${restId}">Update</a></td>
+                <td><a href="dishes/delete?id=${dish.id}&restId=${restId}">Delete</a></td>
                 <c:set var="restId" value="${restId}"/>
             </tr>
         </c:forEach>
         <hr>
-        <a href="dishes?action=create&restId=${restId}">Add Dish</a>
+        <a href="dishes/create?restId=${restId}">Add Dish</a>
         <hr>
         <hr>
-        <a href="restaurants?action=vote&restId=${restId}">Vote for this restaurant</a>
+        <a href="restaurants/vote?restId=${restId}">Vote for this restaurant</a>
         <h2>Today votes: ${votes}</h2>
         <hr>
     </table>
     <h2> </h2>
     <a href="restaurants">Go back to restaurant select menu</a>
 </section>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

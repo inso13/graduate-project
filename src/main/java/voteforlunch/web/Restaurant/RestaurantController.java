@@ -1,11 +1,14 @@
 package voteforlunch.web.Restaurant;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import voteforlunch.AuthorizedUser;
 import voteforlunch.model.Restaurant;
+import voteforlunch.model.User;
+import voteforlunch.web.user.UserController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
@@ -20,6 +23,9 @@ public class RestaurantController extends RestaurantAbstractController{
     public Restaurant get(int id) {
         return super.get(id);
     }
+
+    @Autowired
+    UserController userController;
 
     private int getId(HttpServletRequest request) {
         String paramId = Objects.requireNonNull(request.getParameter("id"));
@@ -63,4 +69,15 @@ public class RestaurantController extends RestaurantAbstractController{
             super.update(restaurant, getId(request));
         }
         return "redirect:restaurants";}
-}
+
+    @RequestMapping(value = "/vote", method = RequestMethod.GET)
+    public String vote(Model model, HttpServletRequest request) {
+    {
+        Restaurant restaurant = get(Integer.parseInt(request.getParameter("restId")));
+        model.addAttribute("restaurant", restaurant);
+        User user = userController.get(AuthorizedUser.getId());
+        model.addAttribute("user", user);
+        return "vote";
+    }
+
+}}

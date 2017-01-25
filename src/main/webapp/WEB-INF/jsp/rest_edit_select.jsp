@@ -1,17 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Restaurant list</title>
-</head>
+<jsp:include page="fragments/headTag.jsp"/>
 <body>
-<h2><a href="index.jsp">Home</a></h2>
+<jsp:include page="fragments/bodyHeader.jsp"/>
+<link rel="stylesheet" href="resources/css/style.css">
+<body>
 <h2>Restaurant edit list</h2>
 
 <%--@elvariable getId="restaurants" type="voteforlunch.model.Restaurant"--%>
 
 
-<form method="post" action="dishes?action=get">
+<form method="post" action="dishes/get">
     <b>Select restaurant to watch menu:</b>
     <select name="restId">
         <c:forEach items="${restaurants}" var="rest">
@@ -39,5 +39,6 @@
     <a href="restaurants/create">Add Restaurant</a>
     <hr>
 </table>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

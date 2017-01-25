@@ -5,13 +5,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>
 <html>
-<head>
-    <title>Restaurant menu</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<jsp:include page="fragments/headTag.jsp"/>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
+<link rel="stylesheet" href="resources/css/style.css">
 <section>
-    <h2><a href="index.jsp">Home</a></h2>
     <h2>Dish list</h2>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
@@ -29,12 +27,13 @@
             </tr>
         </c:forEach>
         <hr>
-        <a href="restaurants?action=vote&restId=${restId}">Vote for this restaurant</a>
+        <a href="restaurants/vote?restId=${restId}">Vote for this restaurant</a>
         <h2>Today votes: ${votes}</h2>
         <hr>
     </table>
     <h2> </h2>
     <a href="restaurants">Go back to restaurant select menu</a>
 </section>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

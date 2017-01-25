@@ -1,16 +1,16 @@
 <%--@elvariable id="restId" type="java.lang.Integer"--%>
 <html>
-<head>
-    <title>Vote</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<jsp:include page="fragments/headTag.jsp"/>
+<body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
+<link rel="stylesheet" href="resources/css/style.css">
 <body>
 <section>
-    <h2><a href="index.jsp">Home</a></h2>
     <hr>
-    <h2>You have already voted today!</h2>
-    <h2><a href="dishes?action=get&restId=${restId}">Press to go back to restaurants list</a></h2>
+    <h3>You have already voted today!</h3>
+    <h3><a href="dishes/get?restId=${restId}">Press to go back to restaurants list</a></h3>
 </section>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
 

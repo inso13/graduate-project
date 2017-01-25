@@ -3,17 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
-<head>
-    <title>Dish</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<jsp:include page="fragments/headTag.jsp"/>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
+<link rel="stylesheet" href="resources/css/style.css">
 <section>
-    <h2><a href="index.jsp">Home</a></h2>
     <h2>${param.action == 'create' ? 'Create dish' : 'Edit dish'}</h2>
     <hr>
     <jsp:useBean id="dish" type="voteforlunch.model.Dish" scope="request"/>
-    <form method="post" action="dishes?action=create&restId=${restId}">
+    <form method="post" action="dishes?restId=${restId}">
         <input type="hidden" name="id" value="${dish.id}">
         <dl>
             <dt>Description:</dt>
@@ -28,5 +26,6 @@
         <button onclick="window.history.back()">Cancel</button>
     </form>
 </section>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
