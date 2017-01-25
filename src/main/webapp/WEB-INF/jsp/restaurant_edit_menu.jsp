@@ -8,7 +8,7 @@
 </head>
 <body>
 <section>
-    <h2><a href="index.html">Home</a></h2>
+    <h2><a href="index.jsp">Home</a></h2>
     <h2>${param.action == 'create' ? 'Create restaurant' : 'Edit restaurant'}</h2>
     <hr>
     <jsp:useBean id="restaurant" type="voteforlunch.model.Restaurant" scope="request"/>

@@ -9,7 +9,15 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import voteforlunch.model.Vote;
 import voteforlunch.VoteTestData;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.Assert.*;
+import static voteforlunch.RestaurantTestData.REST1_ID;
+import static voteforlunch.UserTestData.ADMIN_ID;
 import static voteforlunch.UserTestData.USER_ID;
 import static voteforlunch.VoteTestData.MATCHER;
 import static voteforlunch.VoteTestData.VOTE1;
@@ -18,13 +26,8 @@ import static voteforlunch.VoteTestData.VOTE1_ID;
 /**
  * Created by Inso on 14.01.2017.
  */
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
-})
-@RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-public class VoteServiceImplTest {
+
+public class VoteServiceImplTest extends AbstractVoteServiceTest {
 
     @Autowired
     private VoteService service;
@@ -34,25 +37,4 @@ public class VoteServiceImplTest {
         Vote vote = service.get(USER_ID);
         MATCHER.assertEquals(vote, VOTE1);
     }
-
-    @Test
-    public void delete() throws Exception {
-
-    }
-
-    @Test
-    public void getAllVotes() throws Exception {
-
-    }
-
-    @Test
-    public void update() throws Exception {
-
-    }
-
-    @Test
-    public void save() throws Exception {
-
-    }
-
 }

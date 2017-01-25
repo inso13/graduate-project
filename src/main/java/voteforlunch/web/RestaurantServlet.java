@@ -6,9 +6,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import voteforlunch.AuthorizedUser;
 import voteforlunch.model.*;
-import voteforlunch.web.Restaurant.RestaurantRestController;
+import voteforlunch.web.Restaurant.RestaurantAbstractController;
 import voteforlunch.web.user.AdminRestController;
-import voteforlunch.web.vote.VoteRestController;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -16,9 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -27,7 +23,7 @@ public class RestaurantServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(RestaurantServlet.class);
 
     private ConfigurableApplicationContext springContext;
-    private RestaurantRestController restaurantRestController;
+    private RestaurantAbstractController restaurantRestController;
     private AdminRestController adminRestController;
 
 
@@ -35,7 +31,7 @@ public class RestaurantServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
-        restaurantRestController = springContext.getBean(RestaurantRestController.class);
+        restaurantRestController = springContext.getBean(RestaurantAbstractController.class);
         adminRestController = springContext.getBean(AdminRestController.class);
 
     }
@@ -54,7 +50,7 @@ public class RestaurantServlet extends HttpServlet {
                 final Restaurant restaurant = new Restaurant(
                         request.getParameter("name"));
 
-                if (request.getParameter("id").isEmpty()) {
+                if (request.getParameter("getId").isEmpty()) {
                     restaurantRestController.create(restaurant);
                     LOG.info("Create {}", restaurant);
                 } else {
@@ -71,9 +67,8 @@ public class RestaurantServlet extends HttpServlet {
         if (action == null) {
             LOG.info("getAll");
             request.setAttribute("restaurants", restaurantRestController.getAll());
-            User currentUser = adminRestController.get(AuthorizedUser.id());
+            User currentUser = adminRestController.get(AuthorizedUser.getId());
             Set<Role> roleSet = currentUser.getRoles();
-
             if (roleSet.contains(Role.ROLE_ADMIN)) {
                 request.getRequestDispatcher("/rest_edit_select.jsp").forward(request, response);
             } else {
@@ -105,7 +100,7 @@ public class RestaurantServlet extends HttpServlet {
 
 
     private int getId(HttpServletRequest request) {
-        String paramId = Objects.requireNonNull(request.getParameter("id"));
+        String paramId = Objects.requireNonNull(request.getParameter("getId"));
         return Integer.valueOf(paramId);
     }
 }

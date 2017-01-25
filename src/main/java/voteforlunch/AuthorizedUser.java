@@ -9,8 +9,17 @@ import voteforlunch.util.MealsUtil;
  */
 public class AuthorizedUser {
     public static int id = BaseEntity.START_SEQ;
+    public static boolean isAdmin=false;
 
-    public static int id() {
+    public static boolean isIsAdmin() {
+        return isAdmin;
+    }
+
+    public static void setIsAdmin(boolean isAdmin) {
+        AuthorizedUser.isAdmin = isAdmin;
+    }
+
+    public static int getId() {
         return id;
     }
 

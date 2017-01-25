@@ -5,10 +5,10 @@
     <title>Restaurant list</title>
 </head>
 <body>
-<h2><a href="index.html">Home</a></h2>
+<h2><a href="index.jsp">Home</a></h2>
 <h2>Restaurant edit list</h2>
 
-<%--@elvariable id="restaurants" type="voteforlunch.model.Restaurant"--%>
+<%--@elvariable getId="restaurants" type="voteforlunch.model.Restaurant"--%>
 
 
 <form method="post" action="dishes?action=get">
@@ -31,12 +31,12 @@
     <c:forEach items="${restaurants}" var="rest">
         <tr>
             <td>${rest.name}</td>
-            <td><a href="restaurants?action=update&id=${rest.id}">Update</a></td>
-            <td><a href="restaurants?action=delete&id=${rest.id}">Delete</a></td>
+            <td><a href="restaurants/update?id=${rest.id}">Update</a></td>
+            <td><a href="restaurants/delete?id=${rest.id}">Delete</a></td>
         </tr>
     </c:forEach>
     <hr>
-    <a href="restaurants?action=create">Add Restaurant</a>
+    <a href="restaurants/create">Add Restaurant</a>
     <hr>
 </table>
 </body>

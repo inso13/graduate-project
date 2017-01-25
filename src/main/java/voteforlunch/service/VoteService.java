@@ -13,7 +13,7 @@ import java.util.Collection;
 public interface VoteService {
     Vote get(int userId) throws NotFoundException;
 
-    void delete(int id, int userId) throws NotFoundException;
+    void delete(int userId) throws NotFoundException;
 
     Collection<Vote> getAllVotes(int restId);
 

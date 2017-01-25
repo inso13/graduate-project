@@ -5,10 +5,10 @@
     <title>Restaurant list</title>
 </head>
 <body>
-<h2><a href="index.html">Home</a></h2>
+<h2><a href="index.jsp">Home</a></h2>
 <h2>Restaurant list</h2>
 
-<%--@elvariable id="restaurants" type="voteforlunch.model.Restaurant"--%>
+<%--@elvariable getId="restaurants" type="voteforlunch.model.Restaurant"--%>
 
 <form method="post" action="dishes?action=get">
     <b>Select restaurant:</b>

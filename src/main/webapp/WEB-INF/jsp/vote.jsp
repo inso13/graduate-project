@@ -10,7 +10,7 @@
 </head>
 <body>
 <section>
-    <h2><a href="index.html">Home</a></h2>
+    <h2><a href="index.jsp">Home</a></h2>
     <hr>
     <h2>Vote menu</h2>
     <h3>You are going to vote for: ${restaurant.name}</h3>

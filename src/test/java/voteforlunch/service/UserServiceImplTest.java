@@ -24,13 +24,8 @@ import static voteforlunch.UserTestData.*;
 /**
  * Created by win-7.1 on 10.01.2017.
  */
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
-})
-@RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-public class UserServiceImplTest {
+
+public class UserServiceImplTest extends AbstractVoteServiceTest {
 
     @Autowired
     private UserService service;

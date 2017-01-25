@@ -1,6 +1,5 @@
 package voteforlunch.web;
 
-import org.omg.CORBA.INTERNAL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -9,10 +8,9 @@ import voteforlunch.AuthorizedUser;
 import voteforlunch.model.Dish;
 import voteforlunch.model.Role;
 import voteforlunch.model.User;
-import voteforlunch.web.Restaurant.RestaurantRestController;
-import voteforlunch.web.dish.DishRestController;
+import voteforlunch.web.dish.DishAbstractController;
 import voteforlunch.web.user.AdminRestController;
-import voteforlunch.web.vote.VoteRestController;
+import voteforlunch.web.vote.VoteAbstractController;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -20,7 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,17 +26,17 @@ public class DishServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(DishServlet.class);
 
     private ConfigurableApplicationContext springContext;
-    private DishRestController dishRestController;
+    private DishAbstractController dishRestController;
     private AdminRestController adminRestController;
-    private VoteRestController voteRestController;
+    private VoteAbstractController voteRestController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
-       dishRestController = springContext.getBean(DishRestController.class);
+       dishRestController = springContext.getBean(DishAbstractController.class);
         adminRestController = springContext.getBean(AdminRestController.class);
-        voteRestController = springContext.getBean(VoteRestController.class);
+        voteRestController = springContext.getBean(VoteAbstractController.class);
     }
 
     @Override
@@ -60,7 +57,7 @@ public class DishServlet extends HttpServlet {
                     request.getParameter("description"),
                     Integer.parseInt(price));
 
-            if (request.getParameter("id").isEmpty()) {
+            if (request.getParameter("getId").isEmpty()) {
                 LOG.info("Create {}", dish);
                 dishRestController.create(dish, Integer.parseInt(restId));
             } else {
@@ -86,7 +83,7 @@ public class DishServlet extends HttpServlet {
                     getAllDishes(restId));
             request.setAttribute("restId", restId);
             request.setAttribute("votes", voteRestController.getAllVotes(restId).size());
-            User currentUser = adminRestController.get(AuthorizedUser.id());
+            User currentUser = adminRestController.get(AuthorizedUser.getId());
             Set<Role> roleSet = currentUser.getRoles();
 
             if (roleSet.contains(Role.ROLE_ADMIN)) {
@@ -113,7 +110,7 @@ public class DishServlet extends HttpServlet {
 
 
     private int getId(HttpServletRequest request) {
-        String paramId = Objects.requireNonNull(request.getParameter("id"));
+        String paramId = Objects.requireNonNull(request.getParameter("getId"));
         return Integer.valueOf(paramId);
     }
 }

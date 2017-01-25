@@ -4,14 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import voteforlunch.AuthorizedUser;
-import voteforlunch.model.Dish;
-import voteforlunch.model.Role;
-import voteforlunch.model.User;
 import voteforlunch.model.Vote;
-import voteforlunch.web.dish.DishRestController;
-import voteforlunch.web.user.AdminRestController;
-import voteforlunch.web.vote.VoteRestController;
+import voteforlunch.web.vote.VoteAbstractController;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -21,20 +15,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.Set;
 
 
 public class VoteServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(VoteServlet.class);
 
     private ConfigurableApplicationContext springContext;
-        private VoteRestController voteRestController;
+        private VoteAbstractController voteRestController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
-       voteRestController = springContext.getBean(VoteRestController.class);}
+       voteRestController = springContext.getBean(VoteAbstractController.class);}
 
     @Override
     public void destroy() {
@@ -80,7 +73,7 @@ public class VoteServlet extends HttpServlet {
 
 
     private int getId(HttpServletRequest request) {
-        String paramId = Objects.requireNonNull(request.getParameter("id"));
+        String paramId = Objects.requireNonNull(request.getParameter("getId"));
         return Integer.valueOf(paramId);
     }
 }

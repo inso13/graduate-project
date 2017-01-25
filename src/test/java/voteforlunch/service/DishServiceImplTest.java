@@ -23,13 +23,8 @@ import static org.junit.Assert.*;
 /**
  * Created by Котик on 10.01.2017.
  */
-@ContextConfiguration({
-        "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
-})
-@RunWith(SpringJUnit4ClassRunner.class)
-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-public class DishServiceImplTest {
+
+public class DishServiceImplTest extends AbstractVoteServiceTest {
 
     @Autowired
     private DishService service;

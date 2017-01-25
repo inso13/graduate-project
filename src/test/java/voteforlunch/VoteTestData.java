@@ -21,5 +21,5 @@ public class VoteTestData {
     public static final int VOTE1_ID = START_SEQ + 12;
 
 
-    public static final Vote VOTE1 = new Vote(VOTE1_ID, LocalDate.now(), REST1, USER);
+    public static final Vote VOTE1 = new Vote(VOTE1_ID, LocalDate.of(2017, 1, 13), REST1, USER);
 }
