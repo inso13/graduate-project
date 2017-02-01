@@ -1,24 +1,33 @@
 package voteforlunch.web.user;
 
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import voteforlunch.model.User;
 
+import java.net.URI;
 import java.util.List;
 
 /**
  * GKislin
  * 06.03.2015.
  */
-@Controller
+@RestController
+@RequestMapping(AdminRestController.REST_URL)
 public class AdminRestController extends AbstractUserController {
+    static final String REST_URL = "/rest/users";
 
     @Override
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getAll() {
         return super.getAll();
     }
 
     @Override
-    public User get(int id) {
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public User get(@PathVariable("id") int id) {
         return super.get(id);
     }
 
@@ -27,13 +36,28 @@ public class AdminRestController extends AbstractUserController {
         return super.create(user);
     }
 
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> createWithLocation(@RequestBody User user) {
+        User created = super.create(user);
+
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.setLocation(uriOfNewResource);
+
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL + "/{id}")
+                .buildAndExpand(created.getId()).toUri();
+
+        return ResponseEntity.created(uriOfNewResource).body(created);
+    }
     @Override
-    public void delete(int id) {
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable("id") int id) {
         super.delete(id);
     }
 
     @Override
-    public void update(User user, int id) {
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@RequestBody User user, @PathVariable("id") int id) {
         super.update(user, id);
     }
 }

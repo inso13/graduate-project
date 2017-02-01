@@ -1,5 +1,7 @@
 package voteforlunch.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -25,6 +27,7 @@ public class Dish extends BaseEntity
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restId", referencedColumnName = "id")
+    @JsonIgnore
     private Restaurant restaurant;
 
     public Dish(String description, int price) {this.description=description; 
