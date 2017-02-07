@@ -46,12 +46,6 @@ public class RestaurantRestController extends RestaurantAbstractController{
         super.delete(id);
     }
 
-    @Override //todo:not working, maybe needs to be moved
-    @GetMapping(value = "dishes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Dish> getAllDishes(@PathVariable("id") int restId) {
-        return super.getAllDishes(restId);
-    }
-
     @Override
     public Restaurant create(Restaurant meal) {
         return super.create(meal);

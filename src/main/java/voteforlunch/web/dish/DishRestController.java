@@ -46,8 +46,8 @@ public class DishRestController extends DishAbstractController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> createWithLocation(@RequestBody Dish dish) {
-        Dish created = super.create(dish, 100002); //TODO: add restaurant
+    public ResponseEntity<Dish> createWithLocation(@RequestBody Dish dish, @RequestBody int restId) {
+        Dish created = super.create(dish, restId);
 
 //        HttpHeaders httpHeaders = new HttpHeaders();
 //        httpHeaders.setLocation(uriOfNewResource);
@@ -66,9 +66,7 @@ public class DishRestController extends DishAbstractController {
 
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody Dish dish, @PathVariable("id") int id, int restId) {
-        //TODO: add restaurant
-        restId=100002;
+    public void update(@RequestBody Dish dish, @PathVariable("id") int id, @RequestBody int restId) {
         super.update(dish, id, restId);
     }
 }

@@ -45,8 +45,8 @@ public class VoteRestController extends VoteAbstractController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Vote> createWithLocation(@RequestBody Vote vote) {
-        Vote created = super.create(vote, 100002); //TODO: add restaurant
+    public ResponseEntity<Vote> createWithLocation(@RequestBody Vote vote, @RequestBody int restId) {
+        Vote created = super.create(vote, restId);
 
 //        HttpHeaders httpHeaders = new HttpHeaders();
 //        httpHeaders.setLocation(uriOfNewResource);
@@ -60,8 +60,7 @@ public class VoteRestController extends VoteAbstractController {
 
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Vote update(@RequestBody Vote vote, @PathVariable("id")int id, int restId) {
-        restId=100002; //TODO: add restaurant
+    public Vote update(@RequestBody Vote vote, @PathVariable("id")int id, @RequestBody int restId) {
         return super.update(vote, id, restId);
     }
 }
