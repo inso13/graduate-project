@@ -15,7 +15,7 @@ import static voteforlunch.model.BaseEntity.START_SEQ;
  */
 public class DishTestData {
 
-    public static final ModelMatcher<Dish> MATCHER = new ModelMatcher<>();
+    public static final ModelMatcher<Dish> MATCHER = ModelMatcher.of(Dish.class);
 
     public static final int DISH1_ID = START_SEQ + 4;
 

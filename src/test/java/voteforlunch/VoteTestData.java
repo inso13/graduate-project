@@ -16,7 +16,7 @@ import static voteforlunch.model.BaseEntity.START_SEQ;
  */
 public class VoteTestData {
 
-    public static final ModelMatcher<Vote> MATCHER = new ModelMatcher<>();
+    public static final ModelMatcher<Vote> MATCHER = ModelMatcher.of(Vote.class);
 
     public static final int VOTE1_ID = START_SEQ + 12;
 

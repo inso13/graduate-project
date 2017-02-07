@@ -16,7 +16,7 @@ import static voteforlunch.model.BaseEntity.START_SEQ;
  */
 public class RestaurantTestData {
 
-    public static final ModelMatcher<Restaurant> MATCHER = new ModelMatcher<>();
+    public static final ModelMatcher<Restaurant> MATCHER = ModelMatcher.of(Restaurant.class);
 
     public static final int REST1_ID = START_SEQ + 2;
     public static final int REST2_ID = START_SEQ + 3;
