@@ -28,7 +28,7 @@ public class DishTestData {
     public static final Dish DISH6 = new Dish(DISH1_ID+5, "Воппер", 140);
     public static final Dish DISH7 = new Dish(DISH1_ID+6, "Пепси кола", 80);
     public static final Dish DISH8 = new Dish(DISH1_ID+7, "Пирожок", 70);
-
+    public static final List<Dish> DISHES = Arrays.asList(DISH1, DISH2, DISH3, DISH4);
     public static Dish getCreated() {
         return new Dish ("Новая еда", 100500);
     }

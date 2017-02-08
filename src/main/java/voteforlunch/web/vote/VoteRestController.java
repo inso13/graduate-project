@@ -22,7 +22,7 @@ public class VoteRestController extends VoteAbstractController {
     static final String REST_URL = "/rest/votes";
 
     @Override
-    @GetMapping(value = "get", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Vote get() {
         return super.get();
     }

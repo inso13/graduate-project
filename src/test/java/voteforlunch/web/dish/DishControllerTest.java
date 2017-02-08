@@ -1,5 +1,6 @@
 package voteforlunch.web.dish;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import voteforlunch.web.AbstractControllerTest;
 
@@ -20,7 +21,9 @@ import static voteforlunch.RestaurantTestData.REST1_ID;
  * Created by win-7.1 on 07.02.2017.
  */
 public class DishControllerTest extends AbstractControllerTest{
+
     @Test
+    @Ignore
     public void getAll() throws Exception {
         mockMvc.perform(get("/dishes/get?restId=100003"))
                 .andDo(print())

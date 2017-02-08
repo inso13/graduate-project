@@ -45,8 +45,8 @@ public class DishRestController extends DishAbstractController {
         return super.getAllDishes(restId);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Dish> createWithLocation(@RequestBody Dish dish, @RequestBody int restId) {
+    @PostMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Dish> createWithLocation(@RequestBody Dish dish, @PathVariable("id") int restId) {
         Dish created = super.create(dish, restId);
 
 //        HttpHeaders httpHeaders = new HttpHeaders();
@@ -65,8 +65,8 @@ public class DishRestController extends DishAbstractController {
     }
 
     @Override
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody Dish dish, @PathVariable("id") int id, @RequestBody int restId) {
+    @PutMapping(value = "/{restId}/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@RequestBody Dish dish, @PathVariable("id") int id, @PathVariable("restId") int restId) {
         super.update(dish, id, restId);
     }
 }
